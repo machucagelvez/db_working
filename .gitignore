@@ -1,0 +1,71 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtualenv
+venv/
+ENV/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# Static and media files
+/staticfiles/
+/media/
+
+# Django migrations
+**/migrations/*.pyc
+**/migrations/*.pyo
+**/migrations/*.py[co]
+**/migrations/__pycache__/
+
+# pyenv
+.python-version
+
+# pytest
+.cache
+
+# IDEs
+.vscode/
+*.swp
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# MySQL
+*.pid
+
+# MacOS
+.DS_Store

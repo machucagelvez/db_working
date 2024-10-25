@@ -7,11 +7,14 @@
   </head>
   <body>
     <h1>Comunícate con nosotros</h1>
-    <form action="/contacto/" method="post">
+    {% if form.errors %}
+    <p style="color: red">Verifica que los datos sean correctos:</p>
+    {% endif %}
+    <form action="" method="post">
       {% csrf_token %}
-      <p>Asunto: <input type="text" name="asunto" /></p>
-      <p>Email: <input type="text" name="email" /></p>
-      <p>Mensaje: <textarea name="mensaje" rows="15" cols="45"></textarea></p>
+      <table>
+        {{ form.as_table }}
+      </table>
       <input type="submit" value="Enviar" />
     </form>
   </body>

@@ -4,6 +4,8 @@ from django.core.mail import send_mail
 
 from gestion_pedidos.models import Articulo
 from django.conf import settings
+from gestion_pedidos.forms import FormularioContacto
+
 
 # Create your views here.
 
@@ -38,14 +40,38 @@ def buscar(request):
 def contacto(request):
     if request.method == "POST":
 
-        # Enviar email:
-        subject = request.POST["asunto"]
-        message = request.POST["mensaje"] + " " + request.POST["email"]
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = ["machucagelvez@outlook.es"]
+        # Envío con formulario creado con forms.py:
+        miFormulario = FormularioContacto(request.POST)
 
-        send_mail(subject, message, email_from, recipient_list)
+        # is_valid() verifica que los campos del formulario son correctos
+        if miFormulario.is_valid():
+            info = (
+                miFormulario.cleaned_data
+            )  # cleaned_data trae los datos que tiene validado el formulario
+            send_mail(
+                info["asunto"],
+                info["mensaje"],
+                info.get("email", settings.EMAIL_HOST_USER),
+                ["machucagelvez@outlook.es"],
+            )
 
-        return render(request, "gracias.html")
+            return render(request, "gracias.html")
 
-    return render(request, "contacto.html")
+    else:
+        # Si request.method no es POST, crea un formulario vacío:
+        miFormulario = FormularioContacto()
+
+    return render(request, "formulario_contacto.html", {"form": miFormulario})
+
+    # Envío desde formulario creado directamente en el html:
+    #     # Enviar email:
+    #     subject = request.POST["asunto"]
+    #     message = request.POST["mensaje"] + " " + request.POST["email"]
+    #     email_from = settings.EMAIL_HOST_USER
+    #     recipient_list = ["machucagelvez@outlook.es"]
+
+    #     send_mail(subject, message, email_from, recipient_list)
+
+    #     return render(request, "gracias.html")
+
+    # return render(request, "contacto.html")
